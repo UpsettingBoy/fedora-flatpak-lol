@@ -3,7 +3,7 @@
 
 Name:           flatpak
 Version:        1.12.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Application deployment framework for desktop apps
 
 License:        LGPLv2+
@@ -223,6 +223,7 @@ fi
 %{_mandir}/man5/flatpak-installation.5*
 %{_mandir}/man5/flatpak-remote.5*
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.Flatpak.SystemHelper.conf
+%dir %{_sysconfdir}/flatpak
 %{_sysconfdir}/flatpak/remotes.d
 %{_sysconfdir}/profile.d/flatpak.sh
 %{_sysusersdir}/flatpak.conf
@@ -265,6 +266,9 @@ fi
 
 
 %changelog
+* Sun Jun 26 2022 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.12.7-3
+- Let flatpak own %%{_sysconfdir}/flatpak (RHBZ#2101073).
+
 * Tue Apr 12 2022 Debarshi Ray <rishi@fedoraproject.org> - 1.12.7-2
 - Avoid SELinux denials caused by read access to /etc/passwd, watching files
   inside /usr/libexec and read access to /var/lib/flatpak
