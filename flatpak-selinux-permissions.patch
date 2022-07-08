@@ -1,7 +1,7 @@
-From b20c074fb225ed3e54337bd50dc18452a3dc3196 Mon Sep 17 00:00:00 2001
+From cdfda661014a86aa0201113ad3ea4f0b077a6d5c Mon Sep 17 00:00:00 2001
 From: Debarshi Ray <debarshir@gnome.org>
 Date: Tue, 12 Apr 2022 20:28:29 +0200
-Subject: [PATCH 1/3] selinux: Let the system helper have read access to
+Subject: [PATCH 1/4] selinux: Let the system helper have read access to
  /etc/passwd
 
 The system-helper (ie., the `flatpak-system-helper` process) is
@@ -10,6 +10,7 @@ domain, and needs to be able to read /etc/passwd.  This explicitly
 permits it to do so to avoid running into SELinux denials.
 
 https://bugzilla.redhat.com/show_bug.cgi?id=2070350
+(cherry picked from commit 002e4455d80fdf692a8feb88b563e5ab37340220)
 ---
  selinux/flatpak.te | 2 ++
  1 file changed, 2 insertions(+)
@@ -28,13 +29,13 @@ index 2bcc507b725a..871ffa2906cc 100644
      dbus_stub()
      dbus_system_domain(flatpak_helper_t, flatpak_helper_exec_t)
 -- 
-2.35.1
+2.35.3
 
 
-From d6743d58bbd0293a4f6992fee9b5e7363892ebe7 Mon Sep 17 00:00:00 2001
+From 248b1f9ffefd3686a4080acd589ee772f7bd0d2c Mon Sep 17 00:00:00 2001
 From: Debarshi Ray <debarshir@gnome.org>
 Date: Tue, 12 Apr 2022 20:56:06 +0200
-Subject: [PATCH 2/3] selinux: Let the system helper watch files inside
+Subject: [PATCH 2/4] selinux: Let the system helper watch files inside
  $libexecdir
 
 The system-helper (ie., the `flatpak-system-helper` process) is
@@ -50,6 +51,7 @@ and is therefore used conditionally when defined.
     https://github.com/fedora-selinux/selinux-policy/pull/1133
 
 https://bugzilla.redhat.com/show_bug.cgi?id=2053634
+(cherry picked from commit f8a9153d0ed464dbd1668976bf5b00edc845c80d)
 ---
  selinux/flatpak.te | 4 ++++
  1 file changed, 4 insertions(+)
@@ -70,19 +72,20 @@ index 871ffa2906cc..0bb776314ddb 100644
      dbus_stub()
      dbus_system_domain(flatpak_helper_t, flatpak_helper_exec_t)
 -- 
-2.35.1
+2.35.3
 
 
-From 04524cb3b79bb777d62f743b1fb4037816c6a3f2 Mon Sep 17 00:00:00 2001
+From 83c318c43c2035fdcfedebe831258fb7d7a83cf5 Mon Sep 17 00:00:00 2001
 From: Debarshi Ray <debarshir@gnome.org>
 Date: Tue, 12 Apr 2022 22:33:11 +0200
-Subject: [PATCH 3/3] selinux: Permit read access to /var/lib/flatpak
+Subject: [PATCH 3/4] selinux: Permit read access to /var/lib/flatpak
 
 It's clearly quite important to have read access to /var/lib/flatpak
 and it's contents.  This explicitly permits that to avoid running
 into SELinux denials.
 
 https://bugzilla.redhat.com/show_bug.cgi?id=2070741
+(cherry picked from commit 8617ab0ad0243f5ae78f505041566b16d8bb45db)
 ---
  selinux/flatpak.te | 2 ++
  1 file changed, 2 insertions(+)
@@ -101,5 +104,41 @@ index 0bb776314ddb..e1fd4377373f 100644
  ifdef(`corecmd_watch_bin_dirs',`
      corecmd_watch_bin_dirs(flatpak_helper_t)
 -- 
-2.35.1
+2.35.3
+
+
+From 399710ada185c1ee232bc3e6266a71688eb152b7 Mon Sep 17 00:00:00 2001
+From: Debarshi Ray <debarshir@gnome.org>
+Date: Wed, 11 May 2022 22:37:35 +0200
+Subject: [PATCH 4/4] selinux: Permit using systemd-userdbd
+
+The systemd-userdbd service was added in systemd 245, which was
+released in March 2020 and is available in RHEL 9.  Therefore, it's
+safe to assume that the systemd_userdbd_stream_connect() SELinux
+interface is also available on all relevant operating systems, unless
+there's reason to believe otherwise.
+
+https://bugzilla.redhat.com/show_bug.cgi?id=2071217
+(cherry picked from commit 4965e5d076b68be70bc50715e63c6fa2c678a072)
+---
+ selinux/flatpak.te | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/selinux/flatpak.te b/selinux/flatpak.te
+index e1fd4377373f..66ebcaa18420 100644
+--- a/selinux/flatpak.te
++++ b/selinux/flatpak.te
+@@ -32,6 +32,10 @@ optional_policy(`
+    policykit_dbus_chat(flatpak_helper_t)
+ ')
+ 
++optional_policy(`
++   systemd_userdbd_stream_connect(flatpak_helper_t)
++')
++
+ optional_policy(`                   
+     unconfined_domain(flatpak_helper_t)
+ ')
+-- 
+2.35.3
 

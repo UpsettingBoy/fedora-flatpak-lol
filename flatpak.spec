@@ -3,7 +3,7 @@
 
 Name:           flatpak
 Version:        1.12.7
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Application deployment framework for desktop apps
 
 License:        LGPLv2+
@@ -266,6 +266,9 @@ fi
 
 
 %changelog
+* Fri Jul 08 2022 Debarshi Ray <rishi@fedoraproject.org> - 1.12.7-4
+- Avoid SELinux denials caused by using systemd-userdbd
+
 * Sun Jun 26 2022 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.12.7-3
 - Let flatpak own %%{_sysconfdir}/flatpak (RHBZ#2101073).
 
