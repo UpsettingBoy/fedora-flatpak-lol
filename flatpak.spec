@@ -3,7 +3,7 @@
 
 Name:           flatpak
 Version:        1.12.7
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Application deployment framework for desktop apps
 
 License:        LGPLv2+
@@ -17,7 +17,11 @@ Source1:        flatpak-add-fedora-repos.service
 
 Patch0:         flatpak-selinux-permissions.patch
 
+# https://github.com/flatpak/flatpak/pull/4992
+Patch1:         flatpak-selinux-permissions-01.patch
+
 BuildRequires:  pkgconfig(appstream-glib)
+
 BuildRequires:  pkgconfig(dconf)
 BuildRequires:  pkgconfig(fuse)
 BuildRequires:  pkgconfig(gdk-pixbuf-2.0)
@@ -266,6 +270,9 @@ fi
 
 
 %changelog
+* Thu Jul 14 2022 Debarshi Ray <rishi@fedoraproject.org> - 1.12.7-5
+- Avoid SELinux denials caused by reading symbolic links in /var/lib/flatpak
+
 * Fri Jul 08 2022 Debarshi Ray <rishi@fedoraproject.org> - 1.12.7-4
 - Avoid SELinux denials caused by using systemd-userdbd
 
