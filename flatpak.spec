@@ -3,7 +3,7 @@
 
 Name:           flatpak
 Version:        1.12.7
-Release:        5%{?dist}
+Release:        lol%{?dist}
 Summary:        Application deployment framework for desktop apps
 
 License:        LGPLv2+
@@ -19,6 +19,9 @@ Patch0:         flatpak-selinux-permissions.patch
 
 # https://github.com/flatpak/flatpak/pull/4992
 Patch1:         flatpak-selinux-permissions-01.patch
+
+# https://github.com/flatpak/flatpak/pull/5079
+Patch2:         flatpak-allow-modify_ldt.patch
 
 BuildRequires:  pkgconfig(appstream-glib)
 
