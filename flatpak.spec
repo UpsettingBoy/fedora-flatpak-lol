@@ -3,7 +3,7 @@
 %global ostree_version 2020.8
 
 Name:           flatpak
-Version:        1.14.0
+Version:        1.15.0
 Release:        1.lol%{?dist}
 Summary:        Application deployment framework for desktop apps
 
@@ -17,7 +17,8 @@ Source1:        flatpak-add-fedora-repos.service
 %endif
 
 # https://github.com/flatpak/flatpak/pull/5079
-Patch0:         flatpak-allow-modify_ldt.patch
+# No need for patch anymore
+# Patch0:         flatpak-allow-modify_ldt.patch
 
 BuildRequires:  pkgconfig(appstream-glib)
 

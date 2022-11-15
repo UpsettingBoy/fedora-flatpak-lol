@@ -5,7 +5,7 @@
 %define _unpackaged_files_terminate_build 0
 
 Name:           flatpak-libs
-Version:        1.14.0
+Version:        1.15.0
 Release:        1.lol%{?dist}
 Summary:        Flatpak libs
 
@@ -14,7 +14,7 @@ URL:            http://flatpak.org/
 Source0:        https://github.com/flatpak/flatpak/releases/download/%{version}/flatpak-%{version}.tar.xz
 
 # https://github.com/flatpak/flatpak/pull/5079
-Patch0:         flatpak-allow-modify_ldt.patch
+# Patch0:         flatpak-allow-modify_ldt.patch
 
 BuildRequires:  pkgconfig(appstream)
 BuildRequires:  pkgconfig(dconf)
