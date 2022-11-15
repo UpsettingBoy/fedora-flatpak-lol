@@ -13,9 +13,6 @@ License:        LGPLv2+
 URL:            http://flatpak.org/
 Source0:        https://github.com/flatpak/flatpak/releases/download/%{version}/flatpak-%{version}.tar.xz
 
-# https://github.com/flatpak/flatpak/pull/5079
-# Patch0:         flatpak-allow-modify_ldt.patch
-
 BuildRequires:  pkgconfig(appstream)
 BuildRequires:  pkgconfig(dconf)
 BuildRequires:  pkgconfig(fuse)
