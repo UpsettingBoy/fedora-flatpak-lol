@@ -5,7 +5,7 @@
 %global ostree_version 2020.8
 
 Name:           flatpak
-Version:        1.15.0
+Version:        1.15.3
 Release:        1.lol%{?dist}
 Summary:        Application deployment framework for desktop apps
 
@@ -276,6 +276,8 @@ fi
 %{_libexecdir}/installed-tests
 
 %changelog
+* Tue Feb 21 2023 Jero Sanchez <jeronimosg@hotmail.es> - 1.15.3-1.lol
+- Update to Flatpak 1.15.3
 * Tue Nov 15 2022 Jero Sanchez <jeronimosg@hotmail.es> - 1.15.0-1.lol
 - Update to Flatpak 1.15.0
 * Thu Sep 29 2022 Jero Sanchez <jeronimosg@hotmail.es> - 1.14.0-1.lol

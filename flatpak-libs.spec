@@ -5,7 +5,7 @@
 %define _unpackaged_files_terminate_build 0
 
 Name:           flatpak-libs
-Version:        1.15.0
+Version:        1.15.3
 Release:        1.lol%{?dist}
 Summary:        Flatpak libs
 
@@ -86,5 +86,7 @@ rm -f %{buildroot}%{_libdir}/libflatpak.la
 %{_libdir}/libflatpak.so.*
 
 %changelog
+* Thu Feb 21 2023 Jero Sanchez <jeronimosg@hotmail.es> - 1.15.3-1.lol
+- Update to Flatpak 1.15.3
 * Thu Sep 29 2022 Jero Sanchez <jeronimosg@hotmail.es> - 1.14.0-1.lol
 - Update to Flatpak 1.14.0 + allow modify_ldt
